@@ -1,2 +1,1 @@
-# TIL
-Today I Learned
+# 데이터통신
