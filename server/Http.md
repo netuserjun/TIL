@@ -9,6 +9,7 @@ http는 request와 response로 나뉜다.
 
 Request message<br>
 ![http_request_header](https://user-images.githubusercontent.com/38284141/50723525-61454280-1122-11e9-8124-25f20da1e3d1.JPG)
+<br>
 출처 : https://codeflow.study/courses/74
 
 
