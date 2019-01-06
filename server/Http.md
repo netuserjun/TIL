@@ -47,3 +47,11 @@ IF-Modified_since
 <hr/>
 
 # Response message header format<br>
+
+
+
+
+
+첫 번째 행은 request line
+그 다음 나오는 정보들은 request headers
+이 둘을 합쳐서 request message header라고 한다.
