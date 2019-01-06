@@ -45,3 +45,5 @@ IF-Modified_since
 마지막으로 웹브라우저가 다운받은 파일버전을 웹서버에게 알려줘서
 웹서버는 응답할때 자기가 가진 파일과 비교해서 자기파일이 더 최신버전이라면 전송함. 버전이 같다면 전송안함.
 <hr/>
+
+# Response message header format<br>
