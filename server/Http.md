@@ -48,10 +48,23 @@ IF-Modified_since
 
 # Response message header format<br>
 
-![image](https://user-images.githubusercontent.com/38284141/50736727-4945ef80-1204-11e9-8d50-4e79764f38d2.png)
-
+![image](https://user-images.githubusercontent.com/38284141/50736727-4945ef80-1204-11e9-8d50-4e79764f38d2.png)<br>
+출처 : http://mscancer22.tripod.com/applicationlayer/id19.html<br>
 
 첫 번째 행은 Status<br>
 version은 http버전 정보, status code는 응답결과, phrase는 응답결과를 사람이 이해하기 쉽게 풀어쓴것<br>
+response status codes<br>
+![image](https://user-images.githubusercontent.com/38284141/50736814-70e98780-1205-11e9-8d16-6ca008206151.png)<br>
+종류가 진짜 많지만 제일 앞에 있는 숫자별로 비슷한 의미를 가진다.<br>
+100번대는 잘 안쓰는건데 정보를 주기위해 쓰는 것<br>
+200번대는 성공했다는 의미. 긍정적인 메세지다.<br>
+300번대는 예를 들어 a.com으로 접속했을때 서버가 300번대를 응답하면 웹브라우저가 다른곳으로 바로 이동하게된다.<br>
+400번대는 클라이언트쪽에 에러가 있다는 것. 404not found 가 유명한데 이건 어떤 주소로 접속했을때 서버에 그게 없는경우 응답해주는것.<br>
+403 Forbidden도 자주 볼 수 있는데 이건 관계자외 출입금지와 비슷한것.<br>
+500번대는 서버에 문제가 생겼을 때 응답해주는 메세지<br>
+
+
+
+
 그 다음 나오는 정보들은 headers
 이 둘을 합쳐서 request message header라고 한다.
