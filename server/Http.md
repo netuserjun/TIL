@@ -51,8 +51,7 @@ IF-Modified_since
 ![image](https://user-images.githubusercontent.com/38284141/50736727-4945ef80-1204-11e9-8d50-4e79764f38d2.png)
 
 
-
-
-첫 번째 행은 request line
-그 다음 나오는 정보들은 request headers
+첫 번째 행은 Status<br>
+version은 http버전 정보, status code는 응답결과, phrase는 응답결과를 사람이 이해하기 쉽게 풀어쓴것<br>
+그 다음 나오는 정보들은 headers
 이 둘을 합쳐서 request message header라고 한다.
