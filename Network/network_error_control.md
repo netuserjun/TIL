@@ -52,7 +52,7 @@
 동영상을 보낸다고 했을 때 각각의 패킷에 들어있는 고해상도 패킷에 이전 패킷의 저해상도 패킷을 결합해 보내는 방식이 있다. 그래서 패킷이 손상된다면 다음 패킷의 저해상도 패킷으로 영상을 복구해 낼 수 있다. 당연히 첫 패킷은 고해상도 뿐이다. 또한 마지막 패킷이 손실된다면 이건 복구할 수 없다. 이렇게 복구된 저해상도는 고해상도 사이에서 거의 알아 챌 수 없다.<br> 
 ![image](https://user-images.githubusercontent.com/38284141/50832583-02860000-1392-11e9-8d91-e4199de01b4d.png)<br>
 
-이 문서의 사진 출처 : 데이터통신과 네트워킹 5, Behrouz A.Forouzan, McGraw-Hill Education Korea
+이 문서의 사진 출처 : 데이터통신과 네트워킹 5판, Behrouz A.Forouzan, McGraw-Hill Education Korea
 
 
 
