@@ -69,8 +69,14 @@ DLC 프로토콜은 비연결지향 혹은 연결지향 프로토콜이다.<br><
 
 # HDLC(High-level DLC)
 
-하이레벨 데이터링크제어는 
-![image](https://user-images.githubusercontent.com/38284141/50888875-ee95d900-1439-11e9-91ee-790bb152ccac.png)
+하이레벨 데이터링크제어는 비트지향 프로토콜이다. 당연히 점대점, 다중점 링크 모두에서 쓰인다.<br>
+HDLC에는 두 가지 전송모드가 존재한다. 정규응답모드(NRM, normal response mode)와 비동기균형모드(ABM, asynchromous balanced mode)이다.<br>
+
+NRM은 지국 구성이 비균형적이다. 그러니까 주국(primary station)이 하나 있고, 종국(secondary station)이 여러 개 있다. 주국은 명령을 보낼 수 있고, 종국은 단지 응답만 할 수 있다. 점대점과 다중점링크 모두에서 사용한다. 흔한 master-slave 관계네.<br>
+
+ABM은 균형적이다. 점대점에서만 사용하고 연결된 두 지국은 서로 주고 받기가 가능하다. 그러니까 주국이자 종국이다. 보통 사용하는 모드다.<br>
+
+## HDLC의 프레임
 
 
 
