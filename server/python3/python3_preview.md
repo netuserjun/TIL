@@ -64,4 +64,5 @@ response header의 content-type과 같은 형식으로 보내주기 위해 파�
 
 이제 다시 웹페이지를 새로고침 해보면<br>
 ![image](https://user-images.githubusercontent.com/38284141/51072225-96144500-16a0-11e9-81e9-61e8eec91abf.png)
-기다렸던 결과가 200과 함게 왔다.
+기다렸던 결과가 200과 함께 왔다.<br>
+이제 파이썬을 시작할 준비가 끝났다.
