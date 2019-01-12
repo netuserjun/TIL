@@ -26,7 +26,7 @@ a를 b로 나눈 결과인 2가 화면에 출력되게 만들건데, 지금 이�
 httpd.conf 파일 내에 수정해야 하는 부분이 두 곳이 있다.<br>
 먼저 mod_cgi.so 내용이 있는 문장이 주석처리(#)가 되어있지 않아야 한다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51072239-e68ba280-16a0-11e9-85db-2ced4578d354.png)
-
+<br>
 두 번째는 디렉토리부분 수정이다.<br>
 Files ~ /Files 부분을 추가했다.<br>
 .py 형식으로 들어오는 모든 파일에 대해 실행 결과를 보여주겠다는 내용이다.<br>
