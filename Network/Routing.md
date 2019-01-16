@@ -62,3 +62,34 @@ RIP보다 빠르게 네트워크 변화에 대처한다. 간단한 인증기능�
 #### External BGP vs Internal BGP
 ![image](https://user-images.githubusercontent.com/38284141/51250110-c88fac00-19d8-11e9-9a2c-7b3c28bff0d9.png)
 간단히 eBGP는 서로 다른 as간의 연결을 위해 사용하고 iBGP는 동일한 as 내에서 사용한다.
+
+
+## 멀티캐스트 라우팅
+### DVMRP(Distance Vector Multicast Routing Protocol)
+유니캐스트 라우팅에서 쓰던 RIP의 확장판이다. 멀티태스킹을 위해서 소스기반 멀티캐스트 트리를 만들어야 한다. 이 트리를 만들기 위해서는 세 단계를 거쳐야한다.
+#### 역경로 포워딩(reverse pass forwarding)
+출발지와 자신 사이의 최적 소스기반트리 생성
+#### 역경로 브로드캐스팅(reverse pass broadcasting)
+자신을 출발점으로 하고 노드는 인터넷의 모든 네트워크인 브로드캐스트 트리 생성
+#### 역경로 멀티태스킹(reverse pass multicasting)
+그룹의 회원이 아닌 노드를 트리에서 잘라냄으로써 멀티캐스트 트리 생성
+![image](https://user-images.githubusercontent.com/38284141/51253628-355b7400-19e2-11e9-8954-45b6f82cd828.png)
+그림에서 보듯 N은 RPF에서 패킷 두 개를 받는다. RPB에서는 부모노드를 지정해서 1개만 받고, RPM에서는 그룹이 아닌 노드를 잘라내서 패킷이 모두에게 전달되지 않게 한다.<br>
+
+### MOSPF(Multicast Open Shortest Path First)
+유니캐스트 라우팅에서 쓰는 OSPF의 확장판. 소스기반 트리 사용. 
+![image](https://user-images.githubusercontent.com/38284141/51254350-3ee5db80-19e4-11e9-9f9e-5b32169bac73.png)
+라우터는 최단 거리 경로 트리를 자기 자신이 아닌 S에서 생성한다. 즉 다른 라우터를 최상위 노드로 하고 자신이 서브 노드로 들어간다. 이게 가능한 이유는 LSDB가 있어서 인터넷 전체 토폴로지 정보를 알고 있기 때문이다.<br>
+이렇게 트리를 생성하고 자기 자신을 찾은 뒤에 자신의 서브 노드들에게 브로드캐스트한다. 그리고 멤버가 아닌 노드들을 잘라내고 멀티캐스트 트리를 완성한다.
+
+### PIM (Protocol Independent Multicast)
+유니캐스트 라우팅프로토 콜종류와관계없이 사용가능한 멀티캐스트 프로토콜. DM, SM 두 가지 모드가 있다.
+#### PIM-DM(PIM-Dense Mode)
+밀집모드. 그룹의 엑티브 멤버가 많은 경우에 사용한다. 소스기반트리 사용. 위에 DVMRP에서 쓰던 RPF랑 RPM 사용하는데 DVMRP는 제거 메시지가 하위 라우터로부터 도착할 때까지 기다리고 멀티캐스트로 변경한다. 그래야 트래픽 낭비없이 패킷들을 보낼 수 있어서다. 그런데 여기 DM모드에서는 애초에 대부분의 라우터들이 그룹에 있다고 생각하니까 이렇게 제거 메시지를 기다리지 않고 바로바로 보낸다. 물론 제거 메시지가 도착하면 해당 노드를 쳐낸다.
+![image](https://user-images.githubusercontent.com/38284141/51255224-25459380-19e6-11e9-859d-511116bccffa.png)
+#### PIM-SM(PIM-Sparse Mode)
+성긴모드. 번역이 이상한데 드문드문 이라는 뜻이다. 밀집의 반대.
+![image](https://user-images.githubusercontent.com/38284141/51256997-0812c400-19ea-11e9-9849-5911441817ac.png)
+RP는 Rendezvous point 랑데부 포인트, 즉 집결 지점이다. RP는 복잡한 알고리즘으로 정하는데 책에서는 알려주지 않는다. 일단 뇌용량을 넘어서니 나도 나중에 쓸 일이 생기면 알아볼거다. RP는 그룹마다 하나씩 있다는 것만 알아두고 넘어가자.<br>
+아무튼 RP가 정해졌으니 여기에 참가를 원하는 네트워크는 join메시지를 보내서 멀티캐스트 트리를 만든다. <br>
+만약에 네트워크 하나가 그룹에서 탈퇴하려면 prune메시지를 RP에게 보낸다.<br>
