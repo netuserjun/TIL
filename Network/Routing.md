@@ -56,3 +56,9 @@ RIP와 다르게 OSPF는 비용을 홉 말고 링크의 처리량, 왕복시간,
 <br>
 OSPF는 네트워크에 변화가 있을 때만 LSP를 주고 받으니까 RIP에 비해 트래픽이 적다. 하지만 위에 링크에 가중치를 두는 것처럼 기타 정보들을 더 포함해서 필요한 메모리는 더 크다.<br>
 RIP보다 빠르게 네트워크 변화에 대처한다. 간단한 인증기능도 있다.<br>
+
+### BGP(border gateway protocol)
+유일한 인터도메인 라우팅 프로토콜. 문서 처음 인터넷 구조에서 말했듯 AS끼리의 연결에 사용하는 글로벌 프로토콜이다.<br>
+#### External BGP vs Internal BGP
+![image](https://user-images.githubusercontent.com/38284141/51250110-c88fac00-19d8-11e9-9a2c-7b3c28bff0d9.png)
+간단히 eBGP는 서로 다른 as간의 연결을 위해 사용하고 iBGP는 동일한 as 내에서 사용한다.
