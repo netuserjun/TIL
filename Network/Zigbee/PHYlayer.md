@@ -51,4 +51,31 @@ CCA모드는 3개가 있다. 표준을 준수하는 PHY는 반드시 이것들�
 <br>
 첫번째 상수는 PSDU(PHY service data unit)가 127 옥텟을 초과할 수 없다는 것을 가리킨다. (옥텟이 바이트를 의미하는건가?)<br>
 두번쨰 상수는 송수신기가 TX에서 RX로 혹은 반대로 바꾸는데 걸리는 시간이다. 이 상수에 기초해서 송수신기는 12심볼 이내로 바꾸는 걸 완료해야 한다.<br>
-MAC과 PHY 프로토콜 계층들에서, 모든 상수들은 일반적인 접두사로 a를 갖는다. 
+MAC과 PHY 프로토콜 계층들에서, 모든 상수들은 일반적인 접두사로 a를 갖는다. NWK와 APL은 상수들의 접두사로 각각 nwkc와 apsc를 갖는다. 상수들은 작동하는 동안 바뀔 수 없다.<br>
+속성들은 작동하는 동안 바뀔 수 있는 변수다. PHY 속성들은 PHY-PIB에 포함된다. 이런 속성들은 PHY의 서비스들을 관리하길 요구된다. PHY-PIB 속성들의 목록이 밑에 표에 나와있다.
+![image](https://user-images.githubusercontent.com/38284141/51820365-d4546a00-2318-11e9-886b-ba9ab45c318f.png)
+<br>
+ 표에서 십자가 모양은 읽기 전용 속성이다. 더 높은 계층은 이 속성을 읽을 수 있지만 PHY만 이들을 바꿀 수 있다. * 으로 표시된 속성들은 읽기 전용인 특정 비트들을 가지고 있다. 이런 표시가 없는 비트들은 상위 계층에 의해 읽히거나 변경될 수 있다. PHY만 읽기 전용 비트들을 변경할 수 있다. 이런 속성들의 규칙들을 여기서 명확히 짚고 넘어가자.
+ 
+ ### 물리층 서비스들
+ 물리층은 두가지 타입 서비스를 제공한다. 첫번째는 PHY 데이터 서비스이고 두번째는 PHY 관리 서비스다. PHY 데이터 서비스는 PPDU(PHY Protocol Data Unit)를 비율 채널(ratio channel)을 가로질러(교차하여) 송수신을 가능하게 한다. PHY는 밑에 그림에서 보이는 PLME(Physical Layer Management Entity)라고 불리는 관리 본체를 포함한다.<br>
+ ![image](https://user-images.githubusercontent.com/38284141/51820987-da4b4a80-231a-11e9-8051-ca0cff1f128e.png)
+ <br>
+ PHY 관리 요소는 PLME에 의해 호출될 수 있다. PHY 데이터 서비스는 PD-SAP(PHY Data Service Access Point)를 통해 접근된다.<br>
+ PHY 관리 서비스는 PLME-SAP를 통해 접근된다. PLME는 또한 PIB를 유지한다.
+ 
+#### PHY 데이터 서비스
+전송되어야 하는 데이터는 항상 MPDU(MAC Protocol Data Unit)로 제공된다. 로컬 MAC은 MPDU 제공과 전송 요청을 발생시킨다. PHY는 전송을 시도하고 시도에 대한 결과가 성공인지 아닌지를 MAC에게 보고한다. 전송 시도 실패의 이유들은 다음 중 하나일 수 있다.
+<br> 1. 라디오 송수신기가 사용불가다.
+<br> 2. 라디오 송수신기가 수신모드다. 라디오는 동시에 송수신을 할 수 없다.
+<br> 3. 라디오 송수신기가 이미 전송에 사용되느라 바쁘다.<br>
+데이터가 라디오 송수신기에 의해 수신될 때, PHY는 MAC에게 MPDU의 도착을 알린다. PHY는 MPDU를 MAC에게 전달할 뿐 아니라 LQI정보도 배달한다.<br>
+아래 그림은 디바이스 사이에서 데이터가 전송되는 과정을 나타낸다.
+![image](https://user-images.githubusercontent.com/38284141/51821548-e506df00-231c-11e9-9ee0-ad7e331013f5.png)
+<br>
+데이터는 항상 응용층에서 오는 것이 아니다. 예를들어 데이터는 더 높은 층에서 받지 않고 MAC층에서 발생될 수도 있다. 위 그림에서 데이터는 ZDO(ZigBee Device Objects)나 APS(Application Support sublayers)어플리케이션 객체 중의 하나로 제공된다. 송신하는 디바이스에서 각 계층은 각각의 헤더와 푸터(푸터는 적용할수있다면)를 데이터 유닛(DU)에 붙이고 밑에 계층에게 내려보낸다. <br>
+DU는 각 계층의 이름을 따서 짓는다. 응용층에서는 APDU, 네트워크층에서는 NPDU, PHY 데이터 서비스는 MPDU를 받아서 PPDU로 만들어 전송한다.<br>
+수신측에서는 데이터가 DU가 목적지 계층에 도착할 때 까지 위 계층으로 올라갈 때마다 헤더와 푸터가 제거된다. <br>
+
+#### PHY 관리 서비스
+PLME-SAP(Physical Layer Management Entity - Service Access Point)는 밑에 그림에서 MLME(MAC Layer Management Entity)와 PLME 사이의 전송을 명령하도록 이용된다.
