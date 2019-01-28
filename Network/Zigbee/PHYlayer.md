@@ -78,4 +78,29 @@ DU는 각 계층의 이름을 따서 짓는다. 응용층에서는 APDU, 네트�
 수신측에서는 데이터가 DU가 목적지 계층에 도착할 때 까지 위 계층으로 올라갈 때마다 헤더와 푸터가 제거된다. <br>
 
 #### PHY 관리 서비스
-PLME-SAP(Physical Layer Management Entity - Service Access Point)는 밑에 그림에서 MLME(MAC Layer Management Entity)와 PLME 사이의 전송을 명령하도록 이용된다.
+PLME-SAP(Physical Layer Management Entity - Service Access Point)는 밑에 그림에서처럼(위에꺼랑 같은거다) MLME(MAC Layer Management Entity)와 PLME 사이의 전송을 명령하도록 이용된다.
+![image](https://user-images.githubusercontent.com/38284141/51822475-c9510800-231f-11e9-83aa-4a8041839b45.png)
+<br>
+PLME-SAP를 통해 제공되는 서비스들은 아래와 같다.<br>
+#### clear channel assessment (CCA)
+MLME는 CSMA-CA가 채널 평가를 요구할 때마다 PLME가 CCA를 수행하는 것을 요청한다. CCA의 결과는 다음 중 하나일 수 있다.
+<br> 1. 송수신기를 쓸 수 없으므로 CCA를 동작할 수 없다.
+<br> 2. 채널이 사용가능하고 전송하는데 사용할 수 있다.
+<br> 3. 채널이 다른 디바이스에 의해 사용되고 있거나 송수신기가 송신중이므로 CCA를 쓸 수 없다.
+<br> PLME는 바쁜 채널과 바쁜 송수신기를 구별하지 않고 두 경우 모두 같은 busy 상태를 MLME에게 보고한다.
+
+#### energy detection (ED)
+ED 요청은 MLME에 의해 발생되고 PLME에게 알려진다. 만약에 ED 측정이 성공적으로 완료된다면, 에너지 레벨은 MLME에게 보고된다. 라디오를 사용할 수 없거나, 송수신기가 송신으로 바쁘면 ED요청은 실패한다.
+
+#### 라디오 송수신기 온오프
+MLME는 PLME가 송수신기를 다음 세 가지 상태로 만들도록 요청할 수 있다. <br>
+1. 송수신기 사용불가<br>
+2. 송신 사용가능<br>
+3. 수신 사용가능<br>
+
+#### PHY-PIB로부터 정보 얻기
+PLME는 PHY-PIB 안에 있는 PHY 어떤 속성값이든 읽을 수 있고, MLME에게 그걸 제공할 수 있다. PHY 속성을 읽는 요청은 항상 MLME에 의해 발행된다..?아오 동의어 많은 단어좀 안썼으면..
+#### PHY-PIB 속성값 셋팅
+읽기전용 PHY 속성은 오직 PHY만 변경 가능하다. 그러나 다른 모든 속성들은 PLME가 PHY-PIB 속성값을 MLME가 건네준 값대로 설정하도록 요청할 수 있다.
+
+### the Service Primitives(원시적인 서비스? 서비스 근본들? 근본적인 서비스?)
