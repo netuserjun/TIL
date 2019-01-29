@@ -131,23 +131,23 @@ PPDU(PHY Protocol Data Unit) 형식은 밑에 그림과 같다. PPDU는 세 가�
 <br>
 SHR은 수신기가 동기화를 가능케하고 비트 스트림으로 잠근다? PHR은 프레임의 길이 정보를 담고있다. 물리층 페이로드는 상위 계층으로부터 제공되고, 다른 기기에게 전송될 데이터나 명령을 포함한다.
 <br>
-SHR은 SFD(Start-of-Frame Delimiter)와 서론(소개? 개요같은거, 걍 프림블로 읽는게 낫겟다)으로 구성된다. 프림블 필드는 수신기가 칩을 얻고 심볼을 동기화하기 위해 수신기에 의해 사용된다. ASK PHYs를 제외한 모든 PHYs의 프림블 필드 안의 비트들은 이진수 0들이다. 868MHz ASK PHY의 프림블은 밑에 표의 시퀀스 0을 반복함으로써 발생된다. 이 프림블의 지속시간은 160 마이크로 초다.
+SHR은 SFD(Start-of-Frame Delimiter)와 서론(소개? 개요같은거, 걍 프림블로 읽는게 낫겟다)으로 구성된다. 프림블 필드는 수신기가 칩을 얻고 심볼을 동기화하기 위해 수신기에 의해 사용된다. ASK PHYs를 제외한 모든 PHYs의 프림블 필드 안의 비트들은 이진수 0들이다. 868MHz ASK PHY의 프림블은 밑에 표의 시퀀스 0을 반복함으로써 발생된다. 이 프림블의 지속시간은 160 마이크로 초다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51896681-4d72c080-23f0-11e9-8af9-5dae64f35d12.png)
 <br>
- 915MHz ASK PHY에서 밑에 표의 시퀀스 0은 6번 반복되고 120 마이크로 초의 지속시간을 갖는다. 
+ 915MHz ASK PHY에서 밑에 표의 시퀀스 0은 6번 반복되고 120 마이크로 초의 지속시간을 갖는다. <br>
 ![image](https://user-images.githubusercontent.com/38284141/51896806-9fb3e180-23f0-11e9-901c-da010215e272.png)
 <br>
- 모든 PHY 프림블의 길이와 지속시간은 아래 표에 나와있다.
+ 모든 PHY 프림블의 길이와 지속시간은 아래 표에 나와있다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51896540-0edd0600-23f0-11e9-9b84-4e1bc317ea99.png)
 <br>
 
-SFD 필드는 SHR의 끝과 PHR의 시작을 표시한다. 868과 915메가헤르츠 ASK PHYs의 SFD는 위에 표 A.1과 A.2의 시퀀스 0을 각각 변환한다. 다른 모든 PHYs들의 SFD는 아래 표와 같은 8비트 필드다.
+SFD 필드는 SHR의 끝과 PHR의 시작을 표시한다. 868과 915메가헤르츠 ASK PHYs의 SFD는 위에 표 A.1과 A.2의 시퀀스 0을 각각 변환한다. 다른 모든 PHYs들의 SFD는 아래 표와 같은 8비트 필드다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51897102-4c8e5e80-23f1-11e9-91f2-7c99584c9c6c.png)
 <br>
-밑에 표는 SFD 필드의 길이를 보여준다.
+밑에 표는 SFD 필드의 길이를 보여준다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51897151-69c32d00-23f1-11e9-8fed-58f42fa41695.png)
 <br>
-PHY 패킷의 다음 필드는 PSDU안에 있는 전체 옥텟(아마 바이트?)의 수를 명시하는 프레임 길이다. PSDU 길이는 0부터 127옥텟 사이의 어떤 값이든지 될 수 있다. 하지만 현실적으로 2006년판 IEEE에 기초한 PSDU 길이는 맥층 확인응답 프레임을 위한 5옥텟 이거나 MPDU를 위한 9에서 127옥텟이다. 밑에 표에 있는 0~4와 6~8의 프레임 길이 값은 나중을 위해 예약됐다.
+PHY 패킷의 다음 필드는 PSDU안에 있는 전체 옥텟(아마 바이트?)의 수를 명시하는 프레임 길이다. PSDU 길이는 0부터 127옥텟 사이의 어떤 값이든지 될 수 있다. 하지만 현실적으로 2006년판 IEEE에 기초한 PSDU 길이는 맥층 확인응답 프레임을 위한 5옥텟 이거나 MPDU를 위한 9에서 127옥텟이다. 밑에 표에 있는 0~4와 6~8의 프레임 길이 값은 나중을 위해 예약됐다.<br>
 ![image](https://user-images.githubusercontent.com/38284141/51897572-62e8ea00-23f2-11e9-8daf-fdc2aed0d723.png)
 <br>
 마지막 필드는 PSDU다. PSDU의 구성요소는 맥층 프레임으로 맥층에 의해 제공된다. 표준에서, 전송될 처음 비트는 SHR의 LSB(Least significant Bit)이다.
