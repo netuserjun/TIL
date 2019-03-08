@@ -16,6 +16,6 @@
 파이썬 내장 웹 서버는 SimpleHTTPRequestHandler 클래스 변수인 extension_map 변숫값을 수정해서 <br>
 특정 확장자인 m3u8, ts 파일이 어떤 MIMEType인지 브라우저에게 알려줘야 한다.<br>
 
-파이썬으로 HTTPS 서버를 구축하려면 ssl 모듈을 임포트해야 한다.<br>
+파이썬으로 HTTPS 서버를 구축하려면 ssl 모듈을 임포트해야 한다..<br>
 ssl 모듈은 소켓 통신에 대한 암호화 레이어 계층을 제공하는 모듈로서 openssl을 사용한다. <br>
 덕분에 openssl이 설치되어 있으면 대부분의 운영체제에서도 암호화 레이어 계층을 쉽게 구현할 수 있는 기능을 제공한다.<br>
