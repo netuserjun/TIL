@@ -1,0 +1,103 @@
+import serial
+import socket
+import time
+import os
+ 
+#For Android, socket open
+S_HOST = ""
+S_PORT = 5000
+S_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+S_socket.bind((S_HOST, S_PORT))
+S_socket.listen(5)
+ 
+print("Waiting for client on port ", S_PORT)
+#A:  Step motor, LED, Keypad, buzzer
+PORT_A = serial.Serial('/dev/ttyACM0', 9600)
+PORT_A.flushInput()
+PORT_A.flushOutput()
+ 
+#B: LED, Stove, Ultrasonic wave, Servo
+PORT_B = serial.Serial('/dev/ttyACM1', 9600)
+PORT_B.flushInput()
+PORT_B.flushOutput()
+ 
+#IP Camera ON
+os.system("sudo motion")
+ 
+try:
+    while True:
+        #client socket
+        C_socket, address = S_socket.accept()
+        print("Connection Complete : ", address)
+        while True:
+        #Client socket data read
+            rawdata = C_socket.recv(1024)
+            data = rawdata.decode()[:-1]
+            if data == "":
+                print(address, " disconnected")
+                break
+            else :
+                print(data)
+                if data == "1234":
+                    PORT_A.write(data.encode())
+                elif data == "stove_on" :
+                    PORT_B.write(data.encode())
+                elif data == "stove_off" :
+                    PORT_B.write(data.encode()) 
+                elif data == "light_0":
+                    PORT_B.write(data.encode()) 
+                elif data == "light_1":
+                    PORT_B.write(data.encode()) 
+                elif data == "light_2":
+                    PORT_B.write(data.encode()) 
+                elif data == "light_3":
+                    PORT_B.write(data.encode()) 
+                elif data == "security_on":
+                    PORT_B.write("ultra_on".encode())
+                    while True:
+                        try:
+                            if PORT_B.inWaiting() > 0 :
+                                line = PORT_B.readline(PORT_B.inWaiting())  
+                                if line == b'Warning\r\n':
+                                    now = time.localtime()
+                                    s = "%04d.%02d.%02d %02d:%02d:%02d" %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
+                                    s = s + " Movement Detected!"
+                                    print(s)
+                                    C_socket.send(s.encode())
+                                else:
+                                    line = ""
+                                                     
+                            C_socket.settimeout(3.0)
+                            tmp = C_socket.recv(1024).decode()[:-1]
+                            print(tmp)
+                            if tmp == "security_off":
+                                PORT_B.write("ultra_off".encode())
+                                break
+ 
+                        except socket.timeout:
+                            continue
+                elif data == "cooling":
+                    PORT_B.write(data.encode())
+                    ser= PORT_B.readline().decode()[:-1]
+                    C_socket.send(ser.encode())
+                elif data == "air_on":
+                    PORT_B.write(data.encode())
+                elif data == "air_off":
+                    PORT_B.write(data.encode())
+                elif data == "window_close":
+                    PORT_B.write(data.encode())
+                elif data == "window_half":
+                    PORT_B.write(data.encode())
+                elif data == "window_full":
+                    PORT_B.write(data.encode())
+                else:
+                    PORT_A.write(data.encode())
+                     
+ 
+ 
+                     
+except KeyboardInterrupt:
+        PORT_A.close()
+        S_socket.close()
+        C_socket.close()
+        PORT_B.close()
