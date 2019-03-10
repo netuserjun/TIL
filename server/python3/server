@@ -3,7 +3,7 @@ import socket
 import time
 import os
  
-#For Android, socket open
+#For Android, socket open //소켓?
 S_HOST = ""
 S_PORT = 5000
 S_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
