@@ -12,3 +12,4 @@ docstring : print('''  여러줄 ''') 이렇게 쓰면 개행문자 안써도 �
 
 변수선언 a = 1   세미콜론 안붙임<br>
 positional formatting : 치환기능 print('문자열 {} 문자열 {} 문자열'.format('문자열', 숫자)) 
+1
