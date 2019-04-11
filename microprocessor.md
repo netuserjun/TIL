@@ -322,6 +322,12 @@ UDR을 천천히 읽어서 수신된 데이터가 유실된 것. 바로 안읽�
 
 
 ## ADC Analog to Digital Converter
+아날로그 형태로 받은 전압을 디지털 값으로 바꾸는 장치. <br>
+변환 범위 : 0V ~ Vcc(최고 전압값) / 0V ~ Vref(Vref핀으로 들어오는 전압값) / 0V ~ 2.56V <br>
+구간 갯수 : 10 bit resolution : 1024개 구간으로 나눔. <br>
+동작 타이밍(얼마나 자주) : 1. single conversion(한 번 변환하고 멈춤) 2. free running(시작해두면 알아서 계속 변환) <br>
+
+ADC = (Vin/Vref) * 1024 <br>
 
 
 1차 질문 <br>
